@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #ADEFD1FF;
+    padding: 30px 10px;
+
+}
+
+.card {
+    max-width: 500px;
+    background-color: #00203FFF;
+    margin: auto;
+    color: white;
+    border-radius: 10px;
+    position: relative;
+}
+
+p {
+    margin: 0px;
+}
+
+.h8 {
+    font-size: 32px;
+    font-weight: 600;
+    word-spacing: 0px;
+}
+
+.text-muted {
+    font-size: 15px;
+    font-weight: 550;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn.btn-primary {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    background-color: #89ABE3FF;
+    border: none;
+
+}
+
+.fas.fa-arrow-right {
+    width: 40px;
+    height: 40px;
+    background-color: #060672;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn.btn-primary:hover .fas.fa-arrow-right {
+    transform: translate(15px);
+    transition: transform 0.2s ease-in;
+}
+
+/* .credit {
+    width: 80px;
+    height: 20px;
+    object-fit: cover;
+}
+
+.paypal {
+    width: 80px;
+    height: 40px;
+    object-fit: cover;
+} */
+.pay {
+    font-size: 30px;
+}
+
+.credit {
+    width: 80px;
+    height: 20px;
+    object-fit: cover;
+}
+
+@media(max-width:500px) {
+    .h8 {
+        font-size: 20px;
+    }
+
+    .text-muted {
+        font-size: 12px;
+    }
+}

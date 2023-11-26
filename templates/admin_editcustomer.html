@@ -1,0 +1,195 @@
+
+{% include 'head.html' %}
+
+{% include 'adminnavbar.html' %}
+
+
+
+<br><br><br>
+
+<style>
+    /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+</style>
+
+
+<center>
+ <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {% with msg=get_flashed_messages() %}
+            {% if msg %}
+              {% for m in msg %}
+                  {{ m }}
+              {% endfor %}
+            {% endif %}
+    {% endwith %}
+</div>
+
+
+
+</center>
+<style>
+    /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+.mbox{
+	background-color: rgba(0, 0, 0,0.7);
+  width: 700px;
+  color: white;
+  margin-left: 400px;
+		}
+
+</style>
+
+
+
+
+<div class="mbox">
+		<center>
+			<br>
+			<a class="navbar-brand" href="#">
+				<span style="color:white;">
+				  View Profile
+				</span>
+          	</a>
+		</center>
+							</h2>
+
+							<hr color="Orange">
+
+						<form method="POST" action="" enctype = "multipart/form-data">
+
+						{% for n in list %}
+						{% if name == n.uname %}
+							<table class="table table-hover">
+								<tr>
+									<td>username</td>
+									<td><input type="text" class="form-control" name="txtusername" placeholder="Enter The Username" readonly value="{{ n.uname }}"> </td>
+								</tr>
+
+								<tr>
+									<td>Email</td>
+									<td><input type="email" class="form-control" name="txtemail" placeholder="Enter the Email" value="{{ n.email }}"> </td>
+								</tr>
+
+								<tr>
+									<td>Password</td>
+									<td><input type=password class="form-control" name="txtpassword1" placeholder="Enter The Password" value="{{ n.pass }}"> </td>
+								</tr>
+								<tr>
+									<td>Confirm Password</td>
+									<td><input type=password class="form-control" name="txtpassword2" placeholder="Enter The Password" value="{{ n.pass }}"> </td>
+								</tr>
+
+                                <tr>
+									<td> </td>
+									<td><input type="Submit" class="btn btn-success" name="update" value="Update">
+                                    <input type="Submit" class="btn btn-danger" name="delete" value="Delete">
+									<a href="/admin-viewcustomer"  class="btn btn-info" >Back</a></td>
+
+								</tr>
+							{% endif %}
+							{% endfor %}
+							</table>
+
+						</form>
+
+		</div>
+					<br>
+					<center><a href="/admin-viewcustomer"  class="btn btn-info" >Back</a></td></center>
+<br>
+		</center>
+</div>
+
+
+
+
+
+
+
+
+{% include 'footer.html' %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

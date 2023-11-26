@@ -1,0 +1,348 @@
+{% include 'head.html' %}
+
+{% include 'usernavbar.html' %}
+
+<style>
+	.mbox{
+	background-color: rgba(0, 0, 0,0.7);
+  width: 700px;
+  color: white;
+  margin-left: 400px;
+		}
+</style>
+
+<br>
+<br>
+<br>
+
+<style>
+    /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: green; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+</style>
+
+<style>
+
+	body{
+    color: #6F8BA4;
+    margin-top:20px;
+}
+.section {
+    padding: 100px 0;
+    position: relative;
+}
+.gray-bg {
+    background-color: #f5f5f5;
+}
+img {
+    max-width: 100%;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+/* About Me
+---------------------*/
+.about-text h3 {
+  font-size: 45px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+@media (max-width: 767px) {
+  .about-text h3 {
+    font-size: 35px;
+  }
+}
+.about-text h6 {
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+@media (max-width: 767px) {
+  .about-text h6 {
+    font-size: 18px;
+  }
+}
+.about-text p {
+  font-size: 18px;
+  max-width: 450px;
+}
+.about-text p mark {
+  font-weight: 600;
+  color: #20247b;
+}
+
+.about-list {
+  padding-top: 10px;
+}
+.about-list .media {
+  padding: 5px 0;
+}
+.about-list label {
+  color: #20247b;
+  font-weight: 600;
+  width: 88px;
+  margin: 0;
+  position: relative;
+}
+.about-list label:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 11px;
+  width: 1px;
+  height: 12px;
+  background: #20247b;
+  -moz-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  -webkit-transform: rotate(15deg);
+  transform: rotate(15deg);
+  margin: auto;
+  opacity: 0.5;
+}
+.about-list p {
+  margin: 0;
+  font-size: 15px;
+}
+
+@media (max-width: 991px) {
+  .about-avatar {
+    margin-top: 30px;
+  }
+}
+
+.about-section .counter {
+  padding: 22px 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
+}
+.about-section .counter .count-data {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.about-section .counter .count {
+  font-weight: 700;
+  color: #20247b;
+  margin: 0 0 5px;
+}
+.about-section .counter p {
+  font-weight: 600;
+  margin: 0;
+}
+mark {
+    background-image: linear-gradient(rgba(252, 83, 86, 0.6), rgba(252, 83, 86, 0.6));
+    background-size: 100% 3px;
+    background-repeat: no-repeat;
+    background-position: 0 bottom;
+    background-color: transparent;
+    padding: 0;
+    color: currentColor;
+}
+.theme-color {
+    color: #fc5356;
+}
+.dark-color {
+    color: #20247b;
+}
+
+</style>
+
+<center>
+ <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {% with msg=get_flashed_messages() %}
+            {% if msg %}
+              {% for m in msg %}
+                  {{ m }}
+              {% endfor %}
+            {% endif %}
+    {% endwith %}
+ </div>
+</center>
+
+<div style="background-color: rgba(0, 0, 0,0.7); " >
+	<br><br>
+<!--<div class="container" style="background-color: rgba(0, 0, 0,0.7); color: white; overflow-x:auto;" >-->
+
+				<br>
+				<center>
+					<a class="navbar-brand" href="#">
+						<center>
+							<span style="color:white;">
+							Buy Product {{ uname }}
+							</span>
+						</center>
+					</a>
+				</center>
+
+								<hr color="Orange">
+
+								<center>
+									 <div id="flash-message" style="display: none;">
+										<h1 style="font-size: 24px; color: #fb0b16; background-color: black;">
+
+											  {% with msg=get_flashed_messages() %}
+												{% if msg %}
+												  {% for m in msg %}
+													  {{ m }}
+												  {% endfor %}
+												{% endif %}
+											  {% endwith %}
+
+										</h1>
+									 </div>
+								</center>
+
+								{% if error %}
+									<p> <strong><h3 style="color:red; padding-left:30px;"> {{error}} </h3></strong> </p>
+								{% endif %}
+
+
+<div>
+	{% for n in productlist %}
+	<div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img src="{{ url_for('static', filename='upload_img/' + n.proimage.decode('utf-8')) }}" alt="Admin"  width="40%">
+                    <div class="mt-3">
+                      <h4>{{ n.proname }}</h4>
+                      <p class="text-muted font-size-sm"></p>
+                    </div>
+                  </div>
+	</div>
+
+	<center>
+	<div class="col-md-8">
+
+              <div class="card mb-3">
+                <div class="card-body">
+				  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Product Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ n.proname }}
+                    </div>
+                  </div>
+					<hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Product Id</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ n.proid }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Rs</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ n.proprice }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Your Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ uname }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Seller Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ n.prouser }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Product Expire Date</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ n.proedate }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Address</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <input type="text" class="form-control" name="txtaddress" placeholder="Enter The Address">
+                    </div>
+                  </div>
+					<hr>
+				  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Payment Method</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <select name="txtpayment" id="type" class="form-control">
+						  <option>Online</option>
+						  <option>Cash On Delivery</option>
+						  <option> Bank Transfer </option>
+					  </select>
+                    </div>
+                  </div>
+
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+						<input type="Submit" class="btn btn-success btn-lg" name="btnsubmit" value="Submit">
+						<a type="Submit" class="btn btn-primary btn-lg" href="/user-prolist" >Back</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+	</div>
+	</center>
+	{% endfor %}
+</div>
+<br><br>
+
+<!--</div>-->
+
+</div>
+
+
+
+
+
+
+
+
+
+
+{% include 'footer.html' %}

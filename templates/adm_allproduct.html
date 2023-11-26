@@ -1,0 +1,41 @@
+ {% include 'admin_headerfile.html' %}
+
+ {% include 'adm_navbar.html' %}
+
+
+  <div class="container">
+      <center><h1 class="h3 mb-0 text-gray-800">Bidding Product List </h1></center>
+        <br>
+
+      <a href="/Admin_add_Product" class="btn btn-info  btn-lg" style="">+</a>
+            <div style="overflow-x:auto;">
+                <table class="table table-hover" >
+              <tr>
+                  <th>Product ID</th>
+                  <th>Image</th>
+                  <th>Product Name</th>
+                  <th>Seller Name</th>
+                  <th>Product Price</th>
+                  <th>View</th>
+              </tr>
+
+                {% for n in product_list %}
+
+              <tr>
+                <td>{{n.proid}}</td>
+                <td>
+                    <img src="{{ url_for('static', filename='upload_img/' + n.proimage.decode('utf-8')) }}" alt="User Profile Image" height="80px" width="90px" style="  border-radius: 5%;">
+
+                </td>
+                <td>{{n.proname}}</td>
+                <td>{{n.prouser}}</td>
+                  <td>{{n.proprice}}</td>
+                <td><a href="{{ url_for('Adminupdateproduct', proid=n.proid) }}" class="btn btn-success .btn-circle .btn-lg">View Product</a> </td>
+              </tr>
+
+                {% endfor %}
+
+
+            </table>
+            </div>
+      </div>

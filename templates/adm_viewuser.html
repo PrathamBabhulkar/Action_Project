@@ -1,0 +1,39 @@
+ {% include 'admin_headerfile.html' %}
+
+ {% include 'adm_navbar.html' %}
+
+
+  <div class="container">
+      <center><h1 class="h3 mb-0 text-gray-800"> Customer List </h1></center>
+        <br>
+
+      <a href="/Admin_adduser" class="btn btn-info  btn-lg" style="">+</a>
+        <div style="overflow-x:auto;">
+            <table class="table table-hover" >
+              <tr>
+                  <th>User Number</th>
+                  <th>Profile</th>
+                  <th>User Name</th>
+                  <th>Password</th>
+                  <th>View</th>
+              </tr>
+
+                {% for n in user_list %}
+
+              <tr>
+                <td>{{loop.index}}</td>
+                <td>
+                    <img src="{{ url_for('static', filename='upload_img/' + n.uimg.decode('utf-8')) }}" alt="User Profile Image" height="55px" width="55px" style="  border-radius: 50%;">
+
+                </td>
+                <td>{{n.uname}}</td>
+                <td>{{n.pass}}</td>
+                <td><a href="{{ url_for('Adminupdateuser', uname=n.uname) }}" class="btn btn-success .btn-circle .btn-lg">View Profile</a> </td>
+              </tr>
+
+                {% endfor %}
+
+
+            </table>
+        </div>
+      </div>
