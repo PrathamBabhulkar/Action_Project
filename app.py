@@ -3,17 +3,17 @@ from flask import *
 from flask import Flask, render_template,request,session,url_for,redirect,flash
 from flask_mysqldb import MySQL
 import datetime
+import gunicorn
 
 app = Flask(__name__)
 app = Flask(__name__, static_folder='static')
 
 app.secret_key = 'Pobb'
 
-
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'mydb'
+app.config['MYSQL_HOST'] = '82.180.140.1'
+app.config['MYSQL_USER'] = 'u146569662_admin1'
+app.config['MYSQL_PASSWORD'] = 'Laksh_2024'
+app.config['MYSQL_DB'] = 'u146569662_auction1'
 mysql = MySQL(app)
 
 
@@ -292,8 +292,6 @@ def adminprolist():
     except Exception as e:
         return f"Error: {str(e)}"
 
-
-
 @app.route('/user-prolist', methods=['GET', 'POST'])
 def userprolist():
     uname = session.get('username')
@@ -306,26 +304,24 @@ def userprolist():
             if search_term:
                 cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
                 # Query the database to retrieve products matching the search term
-                cur.execute("SELECT * FROM product WHERE proname LIKE %s", ('%' + search_term + '%',))
+                cur.execute("SELECT * FROM product WHERE proname LIKE %s AND prostatus NOT IN ('item sold', 'Not Available')", ('%' + search_term + '%',))
                 productlist = cur.fetchall()
                 cur.close()
             else:
-                # If no search term provided, retrieve all products
+                # If no search term provided, retrieve all products excluding "item sold" and "Not Available"
                 cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-                #cur.execute("SELECT * FROM product")
-                cur.execute("SELECT * FROM product WHERE prouser != %s", (uname,))
+                cur.execute("SELECT * FROM product WHERE prouser != %s AND prostatus NOT IN ('item sold', 'Not Available')", (uname,))
                 productlist = cur.fetchall()
                 cur.close()
 
         else:
-            # If it's a 'GET' request without search, retrieve all products
+            # If it's a 'GET' request without search, retrieve all products excluding "item sold" and "Not Available"
             cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-            #cur.execute("SELECT * FROM product")
-            cur.execute("SELECT * FROM product WHERE prouser != %s", (uname,))
+            cur.execute("SELECT * FROM product WHERE prouser != %s AND prostatus NOT IN ('item sold', 'Not Available')", (uname,))
             productlist = cur.fetchall()
             cur.close()
 
-            # If it's a 'GET' request without search, retrieve all products
+            # If it's a 'GET' request without search, retrieve all products excluding "item sold" and "Not Available"
             cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
             cur.execute("SELECT * FROM msg")
             msglist = cur.fetchall()
@@ -333,14 +329,12 @@ def userprolist():
 
         cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cur.execute("SELECT uname, uimg FROM signup WHERE uname=%s", (uname,))
-        # cur.execute("SELECT * FROM signup WHERE uname=%s", (uname,))
         ulist = cur.fetchall()
         cur.close()
 
-        return render_template('user_prolist.html', productlist=productlist,uname=uname, msglist=msglist, ulist=ulist)
+        return render_template('user_prolist.html', productlist=productlist, uname=uname, msglist=msglist, ulist=ulist)
     except Exception as e:
         return f"Error: {str(e)}"
-
 
 
 @app.route('/report/<int:proid>', methods=['GET', 'POST'])
@@ -482,7 +476,7 @@ def userbuy(proid):
         username = request.form['txtprouser']
         address = request.form['txtaddress']
         payment = request.form['txtpayment']
-        owner_name =request.form['txtowner']
+        owner_name = request.form['txtowner']
 
 
         try:
@@ -496,7 +490,6 @@ def userbuy(proid):
             mysql.connection.commit()
             cur.close()
             flash("Product Buy Request send successfully")
-            # return "Product Buy Request send  successfully"
         except Exception as e:
             return f"Error: {str(e)}"
 
@@ -595,12 +588,6 @@ def userbid():
         return render_template('user_mybid.html', productlist=productlist,uname=uname,ulist=ulist )
     except Exception as e:
         return f"Error: {str(e)}"
-
-
-
-# @app.route('/user-pay')
-# def userpay():
-#     return render_template('user_payment.html')
 
 
 @app.route('/user-profile')
@@ -1180,13 +1167,38 @@ def Admincate():
 
 
 
-# @app.route('/Admin_Dashboard')
-# def Admindashboard():
-#     return render_template('admindashboardindex.html')
+@app.route('/customer_profile_view/<uname>')
+def customerprofileview(uname):
 
-# @app.route('/Admin_Dashboard')
-# def Admindashboard():
-#     return render_template('admindashboardindex.html')
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur.execute("SELECT * FROM signup WHERE uname=%s", (uname,))
+    customer = cur.fetchall()
+    cur.close()
+
+    return render_template('user_view_cust_profile.html', customer=customer,)
+
+
+
+@app.route('/user_buy_product_list')
+def userbuyproductlist():
+    uname = session.get('username')
+
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    # cur.execute("SELECT * FROM buy WHERE buname=%s", (uname,))
+    cur.execute("SELECT buy.bname, product.proimage, buy.baddress,product.procname, product.proabout, buy.bprice, buy.bmethod FROM product JOIN buy ON product.proid = buy.bid WHERE buy.buname = %s",(uname,))
+    product = cur.fetchall()
+    cur.close()
+
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cur.execute("SELECT uname, uimg FROM signup WHERE uname=%s", (uname,))
+    ulist = cur.fetchall()
+    cur.close()
+    return render_template('user_buy_product_list.html',uname=uname,ulist=ulist,product=product)
+
+
+# if __name__ == '__main__':
+#     app.run(debug=True)  # Enable debug mode for development
+
 
 if __name__ == '__main__':
-    app.run(debug=True)  # Enable debug mode for development
+    app.run(debug=False, host="0.0.0.0")  # Enable debug mode for development
