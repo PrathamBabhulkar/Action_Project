@@ -1,0 +1,154 @@
+{% include 'head.html' %}
+
+{% include 'usernavbar.html' %}
+
+
+<style>
+	.mbox{
+	background-color: rgba(0, 0, 0,0.7);
+  width: 700px;
+  color: white;
+  margin-left: 400px;
+		}
+</style>
+
+<br>
+<br>
+<br>
+
+
+
+<style>
+    /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: green; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+</style>
+
+
+<center>
+ <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {% with msg=get_flashed_messages() %}
+            {% if msg %}
+              {% for m in msg %}
+                  {{ m }}
+              {% endfor %}
+            {% endif %}
+    {% endwith %}
+</div>
+
+
+
+</center>
+
+
+<div class="container" style="background-color: rgba(0, 0, 0,0.7); color: white;">
+		<center>
+			<br>
+			<a class="navbar-brand" href="#">
+				<span style="color:white;">
+				  Add Product
+				</span>
+          	</a>
+		</center>
+							</h2>
+
+							<hr color="Orange">
+
+						<form method="POST" action="" enctype = "multipart/form-data">
+
+							<table class="table table-hover">
+								<tr hidden>
+									<td>Product Id</td>
+									<td><input type="text" class="form-control" name="txtproid" placeholder="Enter The Product Id" > </td>
+								</tr>
+
+								<tr>
+									<td>Product User</td>
+									<td><input type="text" class="form-control" name="txtprouser" placeholder="Enter the Product User" value="{{ uname }}" readonly> </td>
+								</tr>
+
+								<tr>
+									<td>Product Name</td>
+									<td><input type="text" class="form-control" name="txtproname" placeholder="Enter The Product Name" required> </td>
+								</tr>
+
+								<tr>
+									<td>About</td>
+									<td><input type="text" class="form-control" name="txtabout" placeholder="Enter the Product About" required> </td>
+								</tr>
+
+								<tr>
+									<td>Product Category Name</td>
+									<td>
+										<select name="txtcname" id="type" class="form-control">
+											{% for m in c_list %}
+											  <option style="color:black;">{{m.cat_name}}</option>
+										    {% endfor %}
+										</select>
+									</td>
+								</tr>
+
+								<tr>
+									<td>Product Price</td>
+									<td><input type="number" class="form-control" name="txtprice" placeholder="Enter the Product Price" required> </td>
+								</tr>
+
+								<tr>
+									<td> Product Image </td>
+									<td><input type="file" class="form-control" name="file" accept="image/png, image/jpeg" required> </td>
+								</tr>
+
+								<tr>
+									<td>Product Use Month</td>
+									<td><input type="number" class="form-control" name="txtusemonth" placeholder="Enter the Month" required> </td>
+								</tr>
+
+								<tr>
+									<td>Product Expire Day</td>
+									<td><input type="datetime-local" class="form-control" name="txtdate" placeholder="Enter the Date" required value="{{date}}"> </td>
+								</tr>
+
+								<tr>
+									<td> </td>
+									<td><input type="Submit" class="btn btn-success" name="btnsubmit" value="Submit">
+									<a href="/user-prolist" class="btn btn-primary">Back</a></td>
+								</tr>
+
+							</table>
+						</form>
+		</div>
+		</center>
+</div>
+
+
+
+
+
+
+
+
+
+{% include 'footer.html' %}

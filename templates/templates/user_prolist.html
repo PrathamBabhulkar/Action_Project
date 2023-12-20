@@ -1,0 +1,289 @@
+
+{% include 'head.html' %}
+
+{% include 'usernavbar.html' %}
+
+<style>
+
+.btn11 {
+ --color: #00A97F;
+ --color2: rgb(10, 25, 30);
+ padding: 0.8em 1.75em;
+ background-color: transparent;
+ border-radius: 6px;
+ border: .3px solid var(--color);
+ transition: .5s;
+ position: relative;
+ overflow: hidden;
+ cursor: pointer;
+ z-index: 1;
+ font-weight: 300;
+ font-size: 17px;
+ font-family: 'Roboto', 'Segoe UI', sans-serif;
+ text-transform: uppercase;
+ color: var(--color);
+}
+
+.btn11::after, .btn::before {
+ content: '';
+ display: block;
+ height: 100%;
+ width: 100%;
+ transform: skew(90deg) translate(-50%, -50%);
+ position: absolute;
+ inset: 50%;
+ left: 25%;
+ z-index: -1;
+ transition: .5s ease-out;
+ background-color: var(--color);
+}
+
+.btn11::before {
+ top: -50%;
+ left: -25%;
+ transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+}
+
+.btn:hover::before {
+ transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+}
+
+.btn:hover::after {
+ transform: skew(45deg) translate(-50%, -50%);
+}
+
+.btn11:hover {
+ color: var(--color2);
+}
+
+.btn:active {
+ filter: brightness(.7);
+ transform: scale(.98);
+}
+
+
+
+
+.box-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust as needed to control spacing between boxes */
+}
+
+.col-lg-4,
+.col-sm-4 {
+    flex: 0 0 calc(33.33% - 20px); /* Adjust the width as needed (33.33% for 3 boxes) */
+    margin-bottom: 20px; /* Adjust as needed to control spacing between rows */
+    box-sizing: border-box;
+}
+
+.box_main {
+    /* Your existing box styling */
+}
+
+   .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust as needed to control spacing between boxes */
+}
+
+.col-lg-4,
+.col-sm-4 {
+    flex: 0 0 calc(33.33% - 20px); /* Adjust the width as needed (33.33% for 3 boxes) */
+    margin-right: 20px; /* Adjust as needed to control spacing between boxes */
+    box-sizing: border-box;
+}
+
+.box_main {
+    /* Your existing box styling */
+}
+
+
+
+<!-- HTML !-->
+<!--<button class="button-24" role="button">Button 24</button>-->
+
+/* CSS */
+.button-24 {
+  background: #FF4742;
+  border: 1px solid #FF4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.button-24:hover,
+.button-24:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #FF4742;
+}
+
+.button-24:active {
+  opacity: .5;
+}
+
+/* Media query for screens with a width between 400px and 450px */
+@media screen and (min-width: 350px) and (max-width: 450px) {
+    .col-lg-4,
+    .col-sm-4 {
+        margin-left: 50px;
+    }
+
+/* Media query for screens with a width between 400px and 450px */
+@media screen and (min-width: 400px) and (max-width: 450px) {
+    .col-lg-4,
+    .col-sm-4 {
+        margin-left: 70px;
+    }
+
+
+</style>
+
+
+         <!-- banner section start -->
+         <div class="banner_section layout_padding">
+            <div class="container">
+               <div id="my_slider" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+                     <div class="carousel-item active">
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <h1 class="banner_taital">Get Start <br>Your Favourite Shopping</h1>
+                              <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="carousel-item">
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <h1 class="banner_taital">Get Start <br>Your Favourite Shopping</h1>
+                              <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="carousel-item">
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <h1 class="banner_taital">Get Start <br>Your Favourite Shopping</h1>
+                              <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+                  <i class="fa fa-angle-left"></i>
+                  </a>
+                  <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+                  <i class="fa fa-angle-right"></i>
+                  </a>
+               </div>
+            </div>
+         </div>
+         <!-- banner section end -->
+      </div>
+      <!-- banner bg main end -->
+      <!-- electronic section start -->
+<br>
+
+<br>
+
+
+      <div class="fashion_section">
+         <div id="electronic_main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <br><br>
+                     <h1 class="fashion_taital">Product List</h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+
+                         <div class="box-container ">
+                            {% for n in productlist %}
+                            <div class="col-lg-4 col-sm-4">
+                                <div class="box_main">
+                                    <h4 class="shirt_text">{{ n.proname }}</h4>
+                                    <p class="price_text">Start Price <span style="color: #262626;">{{ n.proprice }} Rs</span></p>
+                                    <div class="electronic_img"><img src="{{ url_for('static', filename='upload_img/' + n.proimage.decode('utf-8')) }}" style="height: 300px; width: 400px;" ></div>
+                                    <center>
+                                        <div class="btn_main">
+            <!--                            <div class="buy_bt"><a href="{{ url_for('userbuy', proid=n.proid) }}">Buy Now</a></div>-->
+                                            <div ><a class="btn btn-success " href="{{ url_for('userbuy', proid=n.proid) }}">Buy Now </a></div>
+<!--                                            <button class="btn"> Button</button>-->
+                                            &nbsp;&nbsp;
+                                            <div ><a class="btn btn-primary" href=" {{ url_for('customerrate',proid=n.proid) }} ">Bid Budjet </a></div>
+
+                                        </div>
+                                    </center>
+
+                                    <br>
+                                    <h4 style="color:red; text-align:center; bold">{{n.prostatus}}</h4>
+
+                                </div>
+                            </div>
+                            {% endfor %}
+                         </div>
+
+
+
+
+
+      <!-- electronic section end -->
+
+
+{% include 'footer.html' %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

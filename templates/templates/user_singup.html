@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>EBid/Signup</title>
+  <link rel="stylesheet" href="/static/css/admin_loginstyle.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="slide navbar style.css">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+
+
+<style>
+    /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: green; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+
+
+</style>
+
+
+<center>
+ <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {% with msg=get_flashed_messages() %}
+            {% if msg %}
+              {% for m in msg %}
+                  {{ m }}
+              {% endfor %}
+            {% endif %}
+    {% endwith %}
+</div>
+
+</center>
+
+	<div class="main">  	
+		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="signup">
+				<form method="POST" enctype="multipart/form-data">
+					<label for="chk" aria-hidden="true">Sign up</label>
+					<input type="text" placeholder="Full Name" required name="txtfullname">
+					<input type="email" placeholder="Email" required name="txtemail">
+					<input type="text" placeholder="Contact" required name="txtmobile" pattern="[0-9]{10}" title="Please enter a 10-digit mobile number">
+					<input type="text" placeholder="User Name" required name="txtusername">
+					<input type="password" placeholder="Password" required name="txtpassword1">
+					<input type="password" placeholder="Confirm Password" required name="txtpassword2">
+					<input type="file" name="file" accept="image/png, image/jpeg" required>
+
+					<button type="submit" name="signup">Sign up</button>
+					<center><a href="/user-login"><h4 style="color:white;">Login Here</h4></a></center>
+				</form>
+
+			</div>
+
+	</div>
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>

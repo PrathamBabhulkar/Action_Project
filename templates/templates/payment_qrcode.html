@@ -1,0 +1,122 @@
+
+
+{% include 'head.html' %}
+
+{% include 'usernavbar.html' %}
+
+<style>
+
+        .box-1
+        {
+           height:300px;
+           width:400px;
+           margin-center:100px;
+            padding-right:50px;
+             justify-content:center;
+             background-color:white;
+           }
+
+
+        .box-2
+        {
+           height:400px;
+           width:400px;
+
+            background-color:whitesmoke;
+            padding:50px;
+         }
+</style>
+
+<style>
+    /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: green; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+</style>
+
+<center>
+ <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {% with msg=get_flashed_messages() %}
+            {% if msg %}
+              {% for m in msg %}
+                  {{ m }}
+              {% endfor %}
+            {% endif %}
+    {% endwith %}
+</div>
+
+
+
+</center>
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center py-5">
+            <h1 class="display-3 text-white mb-4 animated slideInDown">QR Code Payment </h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center mb-0">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Payment Option</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+   <!-- Contact Start -->
+    <center>
+    <div id="con_main_box" >
+        <center>
+              <br>
+              <div><h2><b>QR Code</b></h2></div><br>
+              <div  class="box-2">
+                 <img src="/static/images/QR_Code.jpg"height="300px"width="300px">
+              </div>
+               <br>
+
+
+              <div><center>
+                  <a href="/user-payment" class="btn btn-success">Submit</a>
+                  <a href="/user-pay" class="btn btn-primary">Back</a>
+                          <a href="/user-mybid" class="btn btn-danger">Exits</a>
+              </center>
+              </div>
+
+          </center>
+
+
+
+
+
+
+
+    </div>
+    </center>
+
+
+    <!-- Contact End -->
+
+{% include "footer.html" %}

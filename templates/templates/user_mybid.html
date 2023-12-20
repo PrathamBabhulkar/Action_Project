@@ -1,0 +1,105 @@
+
+{% include 'head.html' %}
+
+{% include 'usernavbar.html' %}
+
+
+
+
+      <!-- electronic section start -->
+<br>
+<br>
+
+      <div class="fashion_section">
+         <div id="electronic_main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <h1 class="fashion_taital">MY BID</h1>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+ <style>
+            #customers {
+              font-family: Arial, Helvetica, sans-serif;
+              border-collapse: collapse;
+              width: 90%;
+            }
+
+            #customers td, #customers th {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+
+            #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+            #customers tr:hover {background-color: #ddd;}
+
+            #customers th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: #04AA6D;
+              color: white;
+            }
+ </style>
+
+
+
+  <center>
+                <h1> My Budget </h1>
+                <br>
+        <form method="POST" action="">
+          <div style="overflow-x:auto; overflow-y: scroll; max-height: 400px;">
+            <table id="customers">
+              <tr>
+                  <th>Product Id</th>
+                <th> Name</th>
+                <th>Product Price</th>
+                <th>Product Name</th>
+                <th>Customer Budjet</th>
+                <th>Seller Answer</th>
+                <th> Buy</th>
+              </tr>
+
+                {% for n in productlist %}
+
+              <tr>
+                <td>{{n.msgid}}</td>
+                <td>{{n.msgcname}}</td>
+                <td>{{n.msgprice}}</td>
+                <td>{{n.msgpname}}</td>
+                <td>{{n.msgbudget}}</td>
+                  <td>{{n.msg}} </td>
+
+                <td>
+                    {% if n.msg == "Done" %}
+                        <a href="/user-pay" class="btn btn-danger" name="btnsubmit">Buy</a>
+                    {% endif %}
+<!--                    <a href="/user-pay"  class="btn btn-danger" name="btnsubmit" >Buy</a>-->
+                </td>
+              </tr>
+
+                {% endfor %}
+
+
+            </table>
+
+
+
+          </div>
+        </form>
+                </center>
+
+
+
+
+
+<br><br><br>
+
+
+
+ {% include 'footer.html' %}

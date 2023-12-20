@@ -1,0 +1,76 @@
+{% include 'head.html' %}
+
+{% include 'usernavbar.html' %}
+
+<body>
+
+<style>
+            #customers {
+              font-family: Arial, Helvetica, sans-serif;
+              border-collapse: collapse;
+              width: 90%;
+            }
+
+            #customers td, #customers th {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+
+            #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+            #customers tr:hover {background-color: #ddd;}
+
+            #customers th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: #04AA6D;
+              color: white;
+            }
+ </style>
+
+<center>
+    <h1 class="fashion_taital">Buy Product List</h1>
+<div style="overflow-y:auto;background-color: #f1ecec;height: 500px; width: auto;" >
+
+    {% for n in product %}
+
+        <div class="container mt-5 mb-5" >
+            <div class="d-flex justify-content-center row">
+                <div class="col-md-10">
+                    <div class="row p-2 bg-white border rounded">
+                        <div class="col-md-3 mt-1"><img class="img-fluid img-responsive rounded product-image" src="{{ url_for('static', filename='upload_img/' + n.proimage.decode('utf-8')) }}" style="height: 100px; width: 100px;"></div>
+                        <div class="col-md-6 mt-1">
+                            <h5>{{n.bname}}</h5>
+                            <div class="d-flex flex-row">
+                            </div>
+                            <div class="mt-1 mb-1 spec-1"><span>Address: {{n.baddress}}</span><span class="dot"></span><span></span><span class="dot"></span><span><br></span></div>
+                            <div class="mt-1 mb-1 spec-1"><span>Category: {{n.procname}}</span><span class="dot"></span><span></span><span class="dot"></span><span><br></span></div>
+                            <p class="text-justify text-truncate para mb-0">About: {{n.proabout}}<br><br></p>
+                        </div>
+                        <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                            <div class="d-flex flex-row align-items-center">
+                                <h4 class="mr-1">Rs{{n.bprice}}</h4><span class="strike-text"></span>
+                            </div>
+                            <h6 class="text-success">{{n.bmethod}}</h6>
+                            <div class="d-flex flex-column mt-4">
+                                <a class="btn btn-primary btn-sm" href="/user-prolist" role="button">Details</a>
+                                <a class="btn btn-outline-primary btn-sm mt-2" href="/user-prolist" role="button">Back</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
+</center>
+</body>
+
+
+
+
+<br><br><br>
+
+{% include 'footer.html' %}
