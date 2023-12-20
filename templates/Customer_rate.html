@@ -1,0 +1,178 @@
+
+{% include 'head.html' %}
+
+{% include 'usernavbar.html' %}
+
+<style>
+	.mbox{
+	background-color: rgba(0, 0, 0,0.7);
+  width: 700px;
+  color: white;
+  margin-left: 400px;
+		}
+</style>
+
+<style>
+    /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: green; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+</style>
+
+<center>
+    <div class="alert">
+       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        {% with msg=get_flashed_messages() %}
+                {% if msg %}
+                  {% for m in msg %}
+                      {{ m }}
+                  {% endfor %}
+                {% endif %}
+        {% endwith %}
+    </div>
+</center>
+
+
+
+<div class="container" style="background-color: rgba(0, 0, 0,0.7); color: white;">
+		<center>
+			<br>
+			<a class="navbar-brand" href="#">
+				<span style="color:white;">
+                     {{ uname }} Budjet
+				</span>
+          	</a>
+		</center>
+				<hr color="Orange">
+				<form method="POST" action="" enctype = "multipart/form-data">
+
+						{% for n in productlist %}
+
+							<table class="table table-hover">
+								<tr>
+									<td>Product Id</td>
+									<td ><b><input type="text" class="form-control" name="txtproid" placeholder="Enter The Product Id" value="{{ n.proid }}" readonly></b> </td>
+								</tr>
+								<tr>
+									<td>Product Name</td>
+									<td><input type="text" class="form-control" name="txtproname" placeholder="Enter The Product Name" value="{{ n.proname }}" readonly> </td>
+								</tr>
+
+								<tr>
+									<td>Product Seller</td>
+									<td><input type="text" class="form-control" name="txtseller" placeholder="Enter The Seller Name" value="{{ n.prouser }}" readonly> </td>
+								</tr>
+
+								<tr>
+									<td>Product Price</td>
+									<td><input type="number" class="form-control" name="txtprice" placeholder="Enter the Product Price", value="{{ n.proprice }}" readonly> </td>
+								</tr>
+
+								<tr>
+									<td>User Name</td>
+									<td><input type="text" class="form-control" name="txtprouser" placeholder="Enter the Product User" value="{{ uname }}" readonly> </td>
+								</tr>
+
+								<tr>
+									<td>Bid Date&Time</td>
+<!--									<td><input type="date" class="form-control" name="txtdate" placeholder="Enter the Product User"  readonly> </td>-->
+									<td><input type="text" class="form-control" name="txtdate" value="{{ dt }}" id="dateField" readonly></td>
+								</tr>
+
+								<tr>
+									<td>Customer Budjet</td>
+									<td><input type="number" class="form-control" name="txtrate"  placeholder="Enter the Price" > </td>
+								</tr>
+
+								<tr>
+									<td></td>
+									<td><input type="Submit" class="btn btn-success" name="btnsubmit" value="Submit">
+									<a href="/user-prolist"  class="btn btn-danger" >Back </a></a></td>
+								</tr>
+							</table>
+						{% endfor %}
+				</form>
+
+</div>
+
+<br><br><br>
+ <style>
+            #customers {
+              font-family: Arial, Helvetica, sans-serif;
+              border-collapse: collapse;
+              width: 90%;
+            }
+
+            #customers td, #customers th {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+
+            #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+            #customers tr:hover {background-color: #ddd;}
+
+            #customers th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: #04AA6D;
+              color: white;
+            }
+ </style>
+<center>
+	<h1> Customer Bid </h1>
+	<br>
+        <form method="POST" action="">
+			<div style="overflow-x:auto;">
+            <table id="customers">
+              <tr>
+				  <th>Sr. Number</th>
+				  <th>Customer Name</th>
+                  <th>Bid Date</th>
+				  <th>Product Price</th>
+                  <th>Product Name</th>
+				  <th>Your name</th>
+                  <th>Customer Budjet</th>
+              </tr>
+
+                {% for n in rate_list %}
+				<tr>
+					<td>{{loop.index}}</td>
+					<td>{{n.buname}}</td>
+					<td>{{n.bdate}} </td>
+					<td>{{n.bprice}}</td>
+					<td>{{n.bname}}</td>
+					<td>{{n.bseller}}</td>
+					<td>{{n.budjet}}</td>
+				</tr>
+                {% endfor %}
+            </table>
+			</div>
+        </form>
+</center>
+
+<br><br><br>
+
+{% include 'footer.html' %}

@@ -1,0 +1,202 @@
+
+{% include 'head.html' %}
+
+{% include 'adminnavbar.html' %}
+
+
+
+<br><br><br>
+
+<style>
+    /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+</style>
+
+
+<center>
+ <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {% with msg=get_flashed_messages() %}
+            {% if msg %}
+              {% for m in msg %}
+                  {{ m }}
+              {% endfor %}
+            {% endif %}
+    {% endwith %}
+</div>
+
+
+
+</center>
+<style>
+    /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+.mbox{
+	background-color: rgba(0, 0, 0,0.7);
+  width: 700px;
+  color: white;
+  margin-left: 400px;
+		}
+
+</style>
+
+
+
+
+<div class="mbox">
+		<center>
+			<br>
+			<a class="navbar-brand" href="#">
+				<span style="color:white;">
+				  View Profile
+				</span>
+          	</a>
+		</center>
+							</h2>
+
+							<hr color="Orange">
+
+						<form method="POST" >
+							<div style="overflow-x:auto;">
+							  <table class="table table-hover">
+								<tr>
+									<td>username</td>
+									<td><input type="text" class="form-control" name="txtusername" placeholder="Enter The Username" required> </td>
+								</tr>
+
+								<tr>
+									<td>Email</td>
+									<td><input type="email" class="form-control" name="txtemail" placeholder="Enter the Email" required> </td>
+								</tr>
+
+								<tr>
+									<td>Password</td>
+									<td><input type=password class="form-control" name="txtpassword1" placeholder="Enter The Password" required > </td>
+								</tr>
+								<tr>
+									<td>Confirm Password</td>
+									<td><input type=password class="form-control" name="txtpassword2" placeholder="Enter The Password" required> </td>
+								</tr>
+
+                                <tr>
+									<td></td>
+									<td>
+									<button class="btn btn-success" type="submit" name="signup">Submit</button>
+									<a href="/admin-viewcustomer"  class="btn btn-info" >Back</a>
+									</td>
+								</tr>
+
+
+							</table>
+							</div>
+
+						</form>
+
+<!--		<form method="POST">-->
+
+<!--					<label for="chk" aria-hidden="true">Sign up</label>-->
+<!--					<input type="text"  placeholder="User name" required="" name="txtusername" required>-->
+<!--					<input type="email"  placeholder="Email" required="" name="txtemail" required>-->
+<!--					<input type="password"  placeholder="Password" required="" name="txtpassword1" required>-->
+<!--					<input type="password"  placeholder="Confirm Password" required="" name="txtpassword2" required>-->
+
+<!--					<button type="submit" name="signup">Sign up</button>-->
+<!--					<center><a href="/user-login"><h4 style="color:white;">Login Here</h4></a></center>-->
+<!--		</form>-->
+		</div>
+		</center>
+</div>
+
+
+
+
+
+
+
+
+{% include 'footer.html' %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

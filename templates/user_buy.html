@@ -1,0 +1,849 @@
+{% include 'head.html' %}
+
+{% include 'usernavbar.html' %}
+
+<!--start order button code here-->
+<style>
+        .truck-button {
+            --color: #000;
+            --background: #00fffc;
+            ;
+            --tick: green;
+            --base: #0D0F18;
+            --wheel: #2B3044;
+            --wheel-inner: #646B8C;
+            --wheel-dot: #fff;
+            --back: #2200ff;
+            --back-inner: #362A89;
+            --back-inner-shadow: #2D246B;
+            --front: #A6ACCD;
+            --front-shadow: #535A79;
+            --front-light: #ffc400;
+            --window: #2B3044;
+            --window-shadow: #404660;
+            --street: #646B8C;
+            --street-fill: #404660;
+            --box: #ffc400;
+            --box-shadow: #ffc400;
+            padding: 12px 0;
+            width: 172px;
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            border: none;
+            outline: none;
+            color: var(--color);
+            background: var(--background);
+            border-radius: var(--br, 5px);
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: transparent;
+            transform-style: preserve-3d;
+            transform: rotateX(var(--rx, 0deg)) translateZ(0);
+            transition: transform 0.5s, border-radius 0.3s linear var(--br-d, 0s);
+        }
+
+        .truck-button:before,
+        .truck-button:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 6px;
+            display: block;
+            background: var(--b,
+                    var(--street));
+            transform-origin: 0 100%;
+            transform: rotateX(90deg) scaleX(var(--sy, 1));
+        }
+
+        .truck-button:after {
+            --sy: var(--progress, 0);
+            --b: var(--street-fill);
+        }
+
+        .truck-button .default,
+        .truck-button .success {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 24px;
+            opacity: var(--o, 1);
+            transition: opacity 0.3s;
+        }
+
+        .truck-button .success {
+            --o: 0;
+            position: absolute;
+            top: 12px;
+            left: 0;
+            right: 0;
+        }
+
+        .truck-button .success svg {
+            width: 12px;
+            height: 10px;
+            display: inline-block;
+            vertical-align: top;
+            fill: none;
+            margin: 7px 0 0 4px;
+            stroke: var(--tick);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 16px;
+            stroke-dashoffset: var(--offset, 16px);
+            transition: stroke-dashoffset 0.4s ease 0.45s;
+        }
+
+        .truck-button .truck {
+            position: absolute;
+            width: 72px;
+            height: 28px;
+            transform: rotateX(90deg) translate3d(var(--truck-x, 4px), calc(var(--truck-y-n, -26) * 1px), 12px);
+        }
+
+        .truck-button .truck:before,
+        .truck-button .truck:after {
+            content: "";
+            position: absolute;
+            bottom: -6px;
+            left: var(--l, 18px);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            z-index: 2;
+            box-shadow: inset 0 0 0 2px var(--wheel), inset 0 0 0 4px var(--wheel-inner);
+            background: var(--wheel-dot);
+            transform: translateY(calc(var(--truck-y) * -1px)) translateZ(0);
+        }
+
+        .truck-button .truck:after {
+            --l: 54px;
+        }
+
+        .truck-button .truck .wheel,
+        .truck-button .truck .wheel:before {
+            position: absolute;
+            bottom: var(--b, -6px);
+            left: var(--l, 6px);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--wheel);
+            transform: translateZ(0);
+        }
+
+        .truck-button .truck .wheel {
+            transform: translateY(calc(var(--truck-y) * -1px)) translateZ(0);
+        }
+
+        .truck-button .truck .wheel:before {
+            --l: 35px;
+            --b: 0;
+            content: "";
+        }
+
+        .truck-button .truck .front,
+        .truck-button .truck .back,
+        .truck-button .truck .box {
+            position: absolute;
+        }
+
+        .truck-button .truck .back {
+            left: 0;
+            bottom: 0;
+            z-index: 1;
+            width: 47px;
+            height: 28px;
+            border-radius: 1px 1px 0 0;
+            background: linear-gradient(68deg, var(--back-inner) 0%, var(--back-inner) 22%, var(--back-inner-shadow) 22.1%, var(--back-inner-shadow) 100%);
+        }
+
+        .truck-button .truck .back:before,
+        .truck-button .truck .back:after {
+            content: "";
+            position: absolute;
+        }
+
+        .truck-button .truck .back:before {
+            left: 11px;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 2;
+            border-radius:
+                0 1px 0 0;
+            background:
+                var(--back);
+        }
+
+        .truck-button .truck .back:after {
+            border-radius: 1px;
+            width: 73px;
+            height: 2px;
+            left: -1px;
+            bottom: -2px;
+            background: var(--base);
+        }
+
+        .truck-button .truck .front {
+            left: 47px;
+            bottom: -1px;
+            height: 22px;
+            width: 24px;
+            -webkit-clip-path:
+                polygon(55% 0,
+                    72% 44%, 100% 58%,
+                    100% 100%,
+                    0 100%, 0 0);
+            clip-path: polygon(55% 0, 72% 44%, 100% 58%, 100% 100%, 0 100%, 0 0);
+            background: linear-gradient(84deg, var(--front-shadow) 0%, var(--front-shadow) 10%, var(--front) 12%, var(--front) 100%);
+        }
+
+        .truck-button
+        .truck .front:before,
+        .truck-button
+        .truck .front:after {
+          content: "";
+          position: absolute;
+        }
+
+        .truck-button .truck .front:before {
+            width: 7px;
+            height: 8px;
+            background: #fff;
+            left: 7px;
+            top: 2px;
+            -webkit-clip-path: polygon(0 0, 60% 0%, 100% 100%, 0% 100%);
+            clip-path: polygon(0 0, 60% 0%, 100% 100%, 0% 100%);
+            background: linear-gradient(59deg, var(--window) 0%, var(--window) 57%, var(--window-shadow) 55%, var(--window-shadow) 100%);
+        }
+
+        .truck-button .truck .front:after {
+            width: 3px;
+            height: 2px;
+            right: 0;
+            bottom: 3px;
+            background: var(--front-light);
+        }
+
+        .truck-button .truck .box {
+            width: 13px;
+            height: 13px;
+            right: 56px;
+            bottom: 0;
+            z-index: 1;
+            border-radius: 1px;
+            overflow: hidden;
+            transform: translate(calc(var(--box-x, -24) * 1px), calc(var(--box-y, -6) * 1px)) scale(var(--box-s, 0.5));
+            opacity: var(--box-o, 0);
+            background: linear-gradient(68deg, var(--box) 0%, var(--box) 50%, var(--box-shadow) 50.2%, var(--box-shadow) 100%);
+            background-size: 250% 100%;
+            background-position-x: calc(var(--bx, 0) * 1%);
+        }
+
+        .truck-button
+        .truck .box:before,
+        .truck-button .truck
+        .box:after {
+          content: "";
+          position: absolute;
+        }
+
+        .truck-button .truck .box:before {
+            content: "";
+            background: rgba(255, 255, 255, 0.2);
+            left: 0;
+            right: 0;
+            top: 6px;
+            height: 1px;
+        }
+
+        .truck-button .truck .box:after {
+            width: 6px;
+            left: 100%;
+            top: 0;
+            bottom: 0;
+            background: var(--back);
+            transform: translateX(calc(var(--hx, 0) * 1px));
+        }
+
+        .truck-button.animation {
+            --rx: -90deg;
+            --br: 0;
+        }
+
+        .truck-button.animation
+        .default {
+            --o: 0;
+        }
+
+        .truck-button.animation.done {
+            --rx: 0deg;
+            --br: 5px;
+            --br-d: .2s;
+        }
+
+        .truck-button.animation.done .success {
+            --o: 1;
+            --offset: 0;
+        }
+
+        html {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        * {
+            box-sizing: inherit;
+        }
+
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            font-family: "Inter UI", "Inter", Arial;
+            justify-content: center;
+            align-items: center;
+/*            background: #000000;*/
+        }
+
+        /* -- YouTube Link Styles -- */
+
+        #source-link {
+            top: 60px;
+        }
+
+        #source-link>i {
+            color: rgb(94, 106, 210);
+        }
+
+        #yt-link {
+            top: 10px;
+        }
+
+        #yt-link>i {
+            color: rgb(219, 31, 106);
+
+        }
+
+        .meta-link {
+            align-items: center;
+            backdrop-filter: blur(3px);
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: inline-flex;
+            gap: 5px;
+            left: 10px;
+            padding: 10px 20px;
+            position: fixed;
+            text-decoration: none;
+            transition: background-color 600ms, border-color 600ms;
+            z-index: 10000;
+        }
+
+        .meta-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .meta-link>i,
+        .meta-link>span {
+            height: 20px;
+            line-height: 20px;
+        }
+
+        .meta-link>span {
+            color: white;
+            font-family: "Rubik", sans-serif;
+            transition: color 600ms;
+        }
+    </style>
+<!--end-->
+
+<style>
+	.mbox{
+	background-color: rgba(0, 0, 0,0.7);
+  width: 700px;
+  color: white;
+  margin-left: 400px;
+		}
+</style>
+
+<br>
+<br>
+<br>
+
+<style>
+    /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: green; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+</style>
+
+<style>
+
+	body{
+    color: #6F8BA4;
+    margin-top:20px;
+}
+.section {
+    padding: 100px 0;
+    position: relative;
+}
+.gray-bg {
+    background-color: #f5f5f5;
+}
+img {
+    max-width: 100%;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+/* About Me
+---------------------*/
+.about-text h3 {
+  font-size: 45px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+@media (max-width: 767px) {
+  .about-text h3 {
+    font-size: 35px;
+  }
+}
+.about-text h6 {
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+@media (max-width: 767px) {
+  .about-text h6 {
+    font-size: 18px;
+  }
+}
+.about-text p {
+  font-size: 18px;
+  max-width: 450px;
+}
+.about-text p mark {
+  font-weight: 600;
+  color: #20247b;
+}
+
+.about-list {
+  padding-top: 10px;
+}
+.about-list .media {
+  padding: 5px 0;
+}
+.about-list label {
+  color: #20247b;
+  font-weight: 600;
+  width: 88px;
+  margin: 0;
+  position: relative;
+}
+.about-list label:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 11px;
+  width: 1px;
+  height: 12px;
+  background: #20247b;
+  -moz-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  -webkit-transform: rotate(15deg);
+  transform: rotate(15deg);
+  margin: auto;
+  opacity: 0.5;
+}
+.about-list p {
+  margin: 0;
+  font-size: 15px;
+}
+
+@media (max-width: 991px) {
+  .about-avatar {
+    margin-top: 30px;
+  }
+}
+
+.about-section .counter {
+  padding: 22px 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
+}
+.about-section .counter .count-data {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.about-section .counter .count {
+  font-weight: 700;
+  color: #20247b;
+  margin: 0 0 5px;
+}
+.about-section .counter p {
+  font-weight: 600;
+  margin: 0;
+}
+mark {
+    background-image: linear-gradient(rgba(252, 83, 86, 0.6), rgba(252, 83, 86, 0.6));
+    background-size: 100% 3px;
+    background-repeat: no-repeat;
+    background-position: 0 bottom;
+    background-color: transparent;
+    padding: 0;
+    color: currentColor;
+}
+.theme-color {
+    color: #fc5356;
+}
+.dark-color {
+    color: #20247b;
+}
+
+</style>
+
+<center>
+ <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {% with msg=get_flashed_messages() %}
+            {% if msg %}
+              {% for m in msg %}
+                  {{ m }}
+              {% endfor %}
+            {% endif %}
+    {% endwith %}
+ </div>
+</center>
+
+<div style="background-color: rgba(0, 0, 0,0.7); " >
+	<br><br>
+<!--<div class="container" style="background-color: rgba(0, 0, 0,0.7); color: white; overflow-x:auto;" >-->
+
+				<br>
+				<center>
+					<a class="navbar-brand" href="#">
+						<center>
+							<span style="color:white;">
+							Buy Product {{ uname }}
+							</span>
+						</center>
+					</a>
+				</center>
+
+								<hr color="Orange">
+
+								<center>
+									 <div id="flash-message" style="display: none;">
+										<h1 style="font-size: 24px; color: #fb0b16; background-color: black;">
+
+											  {% with msg=get_flashed_messages() %}
+												{% if msg %}
+												  {% for m in msg %}
+													  {{ m }}
+												  {% endfor %}
+												{% endif %}
+											  {% endwith %}
+
+										</h1>
+									 </div>
+								</center>
+
+								{% if error %}
+									<p> <strong><h3 style="color:red; padding-left:30px;"> {{error}} </h3></strong> </p>
+								{% endif %}
+
+
+<div>
+	{% for n in productlist %}
+	<div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <img src="{{ url_for('static', filename='upload_img/' + n.proimage.decode('utf-8')) }}" alt="Admin"  width="40%">
+                    <div class="mt-3">
+                      <h4>{{ n.proname }}</h4>
+                      <p class="text-muted font-size-sm"></p>
+                    </div>
+                  </div>
+	</div>
+
+	<center>
+	<div class="col-md-8">
+    <form method="POST" id="buyForm">
+              <div class="card mb-3">
+                <div class="card-body">
+				  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Product Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ n.proname }}
+                    </div>
+                  </div>
+					<hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Product Id</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ n.proid }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Rs</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ n.proprice }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Your Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ uname }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Seller Name</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ n.prouser }}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Product Expire Date</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {{ n.proedate }}
+                    </div>
+                  </div>
+                  <hr>
+                    <input type="hidden" name="txtproid" value="{{ n.proid }}">
+                    <input type="hidden" name="txtproname" value="{{ n.proname }}">
+                    <input type="hidden" name="txtprice" value="{{ n.proprice }}">
+                    <input type="hidden" name="txtprouser" value="{{ uname }}">
+
+                    <input type="hidden" name="txtowner" value="{{ n.prouser }}">
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Address</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <input type="text" class="form-control" name="txtaddress" placeholder="Enter The Address" required>
+                    </div>
+                  </div>
+					<hr>
+				  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Payment Method</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      <select name="txtpayment" id="type" class="form-control" required>
+						  <option>Online</option>
+						  <option>Cash On Delivery</option>
+						  <option> Bank Transfer </option>
+					  </select>
+                    </div>
+                  </div>
+
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+						<input type="Submit" class="btn btn-success btn-lg" name="btnsubmit" value="Submit">
+						<a type="Submit" class="btn btn-primary btn-lg" href="/user-prolist" >Back</a>
+
+<!--                            <button type="button" class="truck-button" onclick="completeOrder()">-->
+<!--                                <span class="default">Complete Order</span>-->
+<!--                                <span class="success">-->
+<!--                                    Order Placed-->
+<!--                                    <svg viewbox="0 0 12 10">-->
+<!--                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>-->
+<!--                                    </svg>-->
+<!--                                </span>-->
+<!--                                <div class="truck">-->
+<!--                                    <div class="wheel"></div>-->
+<!--                                    <div class="back"></div>-->
+<!--                                    <div class="front"></div>-->
+<!--                                    <div class="box"></div>-->
+<!--                                </div>-->
+<!--                            </button>-->
+
+                            <script>
+                                    document.querySelectorAll('.truck-button').forEach(button => {
+                                        button.addEventListener('click', e => {
+
+                                            e.preventDefault();
+
+                                            let box = button.querySelector('.box'),
+                                                truck = button.querySelector('.truck');
+
+                                            if (!button.classList.contains('done')) {
+
+                                                if (!button.classList.contains('animation')) {
+
+                                                    button.classList.add('animation');
+
+                                                    gsap.to(button, {
+                                                        '--box-s': 1,
+                                                        '--box-o': 1,
+                                                        duration: .3,
+                                                        delay: .5
+                                                    });
+
+                                                    gsap.to(box, {
+                                                        x: 0,
+                                                        duration: .4,
+                                                        delay: .7
+                                                    });
+
+                                                    gsap.to(button, {
+                                                        '--hx': -5,
+                                                        '--bx': 50,
+                                                        duration: .18,
+                                                        delay: .92
+                                                    });
+
+                                                    gsap.to(box, {
+                                                        y: 0,
+                                                        duration: .1,
+                                                        delay: 1.15
+                                                    });
+
+                                                    gsap.set(button, {
+                                                        '--truck-y': 0,
+                                                        '--truck-y-n': -26
+                                                    });
+
+                                                    gsap.to(button, {
+                                                        '--truck-y': 1,
+                                                        '--truck-y-n': -25,
+                                                        duration: .2,
+                                                        delay: 1.25,
+                                                        onComplete() {
+                                                            gsap.timeline({
+                                                                onComplete() {
+                                                                    button.classList.add('done');
+                                                                }
+                                                            }).to(truck, {
+                                                                x: 0,
+                                                                duration: .4
+                                                            }).to(truck, {
+                                                                x: 40,
+                                                                duration: 1
+                                                            }).to(truck, {
+                                                                x: 20,
+                                                                duration: .6
+                                                            }).to(truck, {
+                                                                x: 96,
+                                                                duration: .4
+                                                            });
+                                                            gsap.to(button, {
+                                                                '--progress': 1,
+                                                                duration: 2.4,
+                                                                ease: "power2.in"
+                                                            });
+                                                        }
+                                                    });
+
+                                                }
+
+                                            } else {
+                                                button.classList.remove('animation', 'done');
+                                                gsap.set(truck, {
+                                                    x: 4
+                                                });
+                                                gsap.set(button, {
+                                                    '--progress': 0,
+                                                    '--hx': 0,
+                                                    '--bx': 0,
+                                                    '--box-s': .5,
+                                                    '--box-o': 0,
+                                                    '--truck-y': 0,
+                                                    '--truck-y-n': -26
+                                                });
+                                                gsap.set(box, {
+                                                    x: -24,
+                                                    y: -6
+                                                });
+                                            }
+
+                                        });
+                                    });
+                            </script>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+    </form>
+        <script>
+            function completeOrder() {
+                document.getElementById("buyForm").submit();
+            }
+        </script>
+
+	</div>
+	</center>
+	{% endfor %}
+</div>
+<br><br>
+
+
+
+<!--</div>-->
+
+</div>
+
+
+
+
+
+
+
+
+
+
+{% include 'footer.html' %}

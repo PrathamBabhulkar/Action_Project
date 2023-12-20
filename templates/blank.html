@@ -1,0 +1,109 @@
+ {% include 'admin_headerfile.html' %}
+
+ {% include 'adm_navbar.html' %}
+
+<style>
+    /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: green; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+
+
+</style>
+ <center>
+ <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {% with msg=get_flashed_messages() %}
+            {% if msg %}
+              {% for m in msg %}
+                  {{ m }}
+              {% endfor %}
+            {% endif %}
+    {% endwith %}
+</div>
+
+</center>
+
+
+			<div class="container">
+
+                 <form method="POST" action="" enctype = "multipart/form-data">
+					<center><h1 class="h3 mb-0 text-gray-800"> ADD USER </h1></center>
+					 <br><br>
+					 	<div style="overflow-x:auto;">
+							<table class="table table-hover">
+								<tr>
+									<td>Your Name</td>
+									<td><input type="text" class="form-control" name="txtusername" placeholder="Enter The Username" > </td>
+								</tr>
+
+								<tr>
+									<td>Your Email</td>
+									<td><input type="text" class="form-control" name="txtemail" placeholder="Enter the Email" > </td>
+								</tr>
+
+								<tr>
+									<td>Mobile Number</td>
+									<td><input type="text" class="form-control" name="txtmobile" placeholder="Enter The Mobile Number" > </td>
+								</tr>
+
+								<tr>
+									<td>Your Password</td>
+									<td><input type=password class="form-control" name="txtpassword1" placeholder="Enter The Password" > </td>
+								</tr>
+
+								<tr>
+									<td>Confirm Password</td>
+									<td><input type=password class="form-control" name="txtpassword2" placeholder="Enter The Password" > </td>
+								</tr>
+
+								<tr>
+									<td>Your Profile</td>
+									<td><input type="file" name="file" accept="image/png, image/jpeg" ></td>
+								</tr>
+
+								<tr>
+									<td> </td>
+									<td>
+										<input type="Submit" class="btn btn-success" name="update" value="Submit" >
+<!--										<input type="submit" class="btn btn-danger" name="delete" value="Delete" >-->
+
+								    </td>
+								</tr>
+
+
+
+							</table>
+						</div>
+
+						</form>
+
+			</div>
+
+
+
+
+
+
+</html>
