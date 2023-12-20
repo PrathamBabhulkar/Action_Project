@@ -1,0 +1,134 @@
+
+{% include 'head.html' %}
+
+{% include 'usernavbar.html' %}
+
+      <!-- electronic section start -->
+<br>
+<br><br>
+
+
+<style>
+    /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: green; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+</style>
+
+
+<center>
+    <div class="alert">
+       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        {% with msg=get_flashed_messages() %}
+                {% if msg %}
+                  {% for m in msg %}
+                      {{ m }}
+                  {% endfor %}
+                {% endif %}
+        {% endwith %}
+    </div>
+</center>
+
+<h1 class="fashion_taital">MY BID</h1>
+
+
+ <style>
+            #customers {
+              font-family: Arial, Helvetica, sans-serif;
+              border-collapse: collapse;
+              width: 90%;
+            }
+
+            #customers td, #customers th {
+              border: 1px solid #ddd;
+              padding: 8px;
+            }
+
+            #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+            #customers tr:hover {background-color: #ddd;}
+
+            #customers th {
+              padding-top: 12px;
+              padding-bottom: 12px;
+              text-align: left;
+              background-color: #04AA6D;
+              color: white;
+            }
+ </style>
+
+  <center>
+                <h1> Customer Budget </h1>
+                <br>
+        <form method="POST" action="">
+           <div style="overflow-x:auto; overflow-y: scroll; max-height: 400px;">
+            <table id="customers">
+              <tr>
+                  <th>Sr. Number</th>
+                <th>Customer Name</th>
+                <th>Mobile Number</th>
+                  <th>Bid Date</th>
+                <th>Product Price</th>
+                <th>Product Name</th>
+                <th>Your name</th>
+                <th>Customer Budget</th>
+                <th>Action</th>
+              </tr>
+
+                {% for n in productlist %}
+                {% if n.bseller == uname %}
+              <tr>
+                <td>{{loop.index}}</td>
+                <td>{{n.buname}}</td>
+                  {% for m in ulist %}
+                  <td>{{m.mb}}</td>
+                  {% endfor %}
+                <td>{{n.bdate}} </td>
+                <td>{{n.bprice}}</td>
+                <td>{{n.bname}}</td>
+                <td>{{n.bseller}}</td>
+                <td>{{n.budjet}}</td>
+
+                  <input type="hidden" name="id" value="{{ n.bid }}">
+                  <input type="hidden" name="username" value="{{ n.buname }}">
+                <td>
+                    <a type="Submit" href="{{ url_for('msgsend', bid=n.bid, buname=n.buname) }}" class="btn btn-primary" name="btnsubmit" >MSG</a>
+                </td>
+              </tr>
+                 {% endif %}
+                {% endfor %}
+
+
+            </table>
+           </div>
+        </form>
+                </center>
+
+
+
+<br><br><br>
+
+
+
+ {% include 'footer.html' %}

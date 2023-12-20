@@ -1,0 +1,240 @@
+
+{% include 'head.html' %}
+
+{% include 'usernavbar.html' %}
+
+<style>
+.box-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust as needed to control spacing between boxes */
+}
+
+.col-lg-4,
+.col-sm-4 {
+    flex: 0 0 calc(33.33% - 20px); /* Adjust the width as needed (33.33% for 3 boxes) */
+    margin-bottom: 20px; /* Adjust as needed to control spacing between rows */
+    box-sizing: border-box;
+}
+
+.box_main {
+    /* Your existing box styling */
+}
+
+   .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust as needed to control spacing between boxes */
+}
+
+.col-lg-4,
+.col-sm-4 {
+    flex: 0 0 calc(33.33% - 20px); /* Adjust the width as needed (33.33% for 3 boxes) */
+    margin-right: 20px; /* Adjust as needed to control spacing between boxes */
+    box-sizing: border-box;
+}
+
+/* Media query for screens with a width between 400px and 450px */
+@media screen and (min-width: 400px) and (max-width: 450px) {
+    .col-lg-4,
+    .col-sm-4 {
+        margin-left: 100px;
+    }
+
+.box_main {
+    /* Your existing box styling */
+}
+
+</style>
+
+
+         <!-- banner section start -->
+         <div class="banner_section layout_padding">
+            <div class="container">
+               <div id="my_slider" class="carousel slide" data-ride="carousel">
+                  <div class="carousel-inner">
+                     <div class="carousel-item active">
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
+                              <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="carousel-item">
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
+                              <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="carousel-item">
+                        <div class="row">
+                           <div class="col-sm-12">
+                              <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
+                              <div class="buynow_bt"><a href="#">Buy Now</a></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+                  <i class="fa fa-angle-left"></i>
+                  </a>
+                  <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+                  <i class="fa fa-angle-right"></i>
+                  </a>
+               </div>
+            </div>
+         </div>
+         <!-- banner section end -->
+      </div>
+      <!-- banner bg main end -->
+      <!-- electronic section start -->
+<br>
+
+<br>
+
+
+      <div class="fashion_section">
+         <div id="electronic_main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <br><br>
+                     <h1 class="fashion_taital">Product List</h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+
+            <div class="fashion_section">
+         <div id="electronic_main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+               <div class="carousel-item active">
+                  <div class="container">
+                     <h1 class="fashion_taital"></h1>
+                     <div class="fashion_section_2">
+                        <div class="row">
+                           <div class="col-lg-4 col-sm-4">
+                              <div class="box_main">
+                                 <h4 class="shirt_text">Laptop</h4>
+                                 <p class="price_text">Start Price  <span style="color: #262626;">-- Rs</span></p>
+                                 <div class="electronic_img"><img src="/static/images/laptop-img.png"></div>
+                                 <div class="btn_main">
+                                    <center>
+                                          <a class="btn btn-success" href="#"> Product Edit</a>
+                                    </center>
+                                 </div>
+                              </div>
+                           </div>
+<!--                           -->
+                           {% for n in productlist %}
+                            <div class="col-lg-4 col-sm-4" >
+                                <div class="box_main">
+                                    <h4 class="shirt_text">{{ n.proname }}</h4>
+                                    <p class="price_text">Start Price <span style="color: #262626;">{{ n.proprice }} Rs</span></p>
+                                    <div class="electronic_img">
+                                      <img src="{{ url_for('static', filename='upload_img/' + n.proimage.decode('utf-8')) }}" style="height: 300px; width: 400px;">
+                                    </div>
+
+<!--                                    <div class="electronic_img"><img src="{{ url_for('static', filename=n.proimage) }}" height="400px" width="400px"></div>-->
+                                    <div class="btn_main">
+                                      <center>
+                                          <a class="btn btn-success" href="{{ url_for('update_product', proid=n.proid) }}"> Product Edit</a>
+                                          <a class="btn btn-primary" href="{{ url_for('adminreport', proid=n.proid) }}"> Product Report</a>
+
+                                      </center>
+
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+
+
+      <!-- electronic section end -->
+
+
+{% include 'footer.html' %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <title>Products</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Product List</h1>-->
+<!--    <table>-->
+<!--        <thead>-->
+<!--            <tr>-->
+<!--                <th>ID</th>-->
+<!--                <th>User</th>-->
+<!--                <th>Name</th>-->
+<!--                <th>About</th>-->
+<!--                <th>Category</th>-->
+<!--                <th>Price</th>-->
+<!--                <th>Image</th>-->
+<!--                <th>Usage Months</th>-->
+<!--            </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--            {% for n in productlist %}-->
+<!--            <tr>-->
+<!--                <td style="color:red;">{{ n.proid }}</td>-->
+<!--                <td>{{ n.prouser }}</td>-->
+<!--                <td>{{ n.proname }}</td>-->
+<!--                <td>{{ n.proabout }}</td>-->
+<!--                <td>{{ n.procname }}</td>-->
+<!--                <td>{{ n.proprice }}</td>-->
+<!--                <td>{{ n.proimage }}</td>-->
+<!--                <td>{{ n.proumonth }}</td>-->
+<!--            </tr>-->
+<!--            {% endfor %}-->
+
+<!--        {{ name }}-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</body>-->
+<!--</html>-->

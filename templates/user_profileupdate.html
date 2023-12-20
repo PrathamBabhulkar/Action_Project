@@ -1,0 +1,191 @@
+
+{% include 'head.html' %}
+
+{% include 'usernavbar.html' %}
+
+
+
+<br><br><br>
+
+<style>
+    /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: green; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+.mbox{
+	background-color: rgba(0, 0, 0,0.7);
+  width: 700px;
+  color: white;
+  margin-left: 400px;
+		}
+
+</style>
+
+<script>
+    function showPassword() {
+        var passwordInput = document.getElementById("passwordInput");
+        var showPasswordBtn = document.getElementById("showPasswordBtn");
+
+        console.log("passwordInput.style.display: " + passwordInput.style.display);
+
+        if (passwordInput.style.display === "none") {
+            passwordInput.style.display = "block";
+            showPasswordBtn.innerHTML = "Hide Password";
+        } else {
+            passwordInput.style.display = "none";
+            showPasswordBtn.innerHTML = "Show Password";
+        }
+    }
+</script>
+
+
+<center>
+ <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {% with msg=get_flashed_messages() %}
+            {% if msg %}
+              {% for m in msg %}
+                  {{ m }}
+              {% endfor %}
+            {% endif %}
+    {% endwith %}
+</div>
+
+
+
+</center>
+
+
+<div class="container" style="background-color: rgba(0, 0, 0,0.7); color: white;">
+		<center>
+			<br>
+			<a class="navbar-brand" href="#">
+				<span style="color:white;">
+				  Update Profile
+				</span>
+          	</a>
+		</center>
+							</h2>
+
+							<hr color="Orange">
+
+						<form method="POST" action="" enctype = "multipart/form-data">
+
+						{% for n in productlist %}
+							<table class="table table-hover">
+								<tr>
+									<td>Full Name</td>
+									<td><input type="text" class="form-control" name="txtfullname" placeholder="Enter The Username" value="{{ n.fname }}"> </td>
+								</tr>
+
+								<tr>
+									<td>Your Email</td>
+									<td><input type="text" class="form-control" name="txtemail" placeholder="Enter the Email" value="{{ n.email }}"> </td>
+								</tr>
+
+								<tr>
+									<td>Mobile Number</td>
+									<td><input type="text" class="form-control" name="txtmobile" placeholder="Enter The Product Id" value="{{ n.mb }}"> </td>
+								</tr>
+
+								<tr>
+									<td>Username</td>
+									<td><input type="text" class="form-control" name="txtusername" placeholder="Enter The Username" value="{{ n.uname }}"> </td>
+								</tr>
+
+								<tr>
+									<td>Your Password</td>
+									<td><input type=password class="form-control" name="txtpassword1" placeholder="Enter The Password" value="{{ n.pass }}"> </td>
+								</tr>
+
+								<tr>
+									<td>Your Profile</td>
+									<td><input type="file" name="file" accept="image/png, image/jpeg" ></td>
+								</tr>
+
+								<tr>
+									<td> </td>
+									<td>
+										<input type="Submit" class="btn btn-success" name="update" value="Update" >
+										<input type="submit" class="btn btn-danger" name="delete" value="Delete" >
+
+								    </td>
+								</tr>
+
+
+
+							</table>
+						{% endfor %}
+						</form>
+		</div>
+		</center>
+</div>
+
+
+
+
+
+
+
+
+{% include 'footer.html' %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

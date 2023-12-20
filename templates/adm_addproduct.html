@@ -1,0 +1,117 @@
+ {% include 'admin_headerfile.html' %}
+
+ {% include 'adm_navbar.html' %}
+
+<style>
+    /* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: green; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+
+
+</style>
+ <center>
+ <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {% with msg=get_flashed_messages() %}
+            {% if msg %}
+              {% for m in msg %}
+                  {{ m }}
+              {% endfor %}
+            {% endif %}
+    {% endwith %}
+</div>
+
+</center>
+
+
+			<div class="container">
+
+                 <form method="POST" action="" enctype = "multipart/form-data">
+					<center><h1 class="h3 mb-0 text-gray-800"> ADD PRODUCT </h1></center>
+					 <br><br>
+
+							<table class="table table-hover">
+								<tr hidden>
+									<td>Product Id</td>
+									<td><input type="text" class="form-control" name="txtproid" placeholder="Enter The Product Id" > </td>
+								</tr>
+
+								<tr>
+									<td>Product User</td>
+									<td><input type="text" class="form-control" name="txtprouser" placeholder="Enter the Product User" required> </td>
+								</tr>
+
+								<tr>
+									<td>Product Name</td>
+									<td><input type="text" class="form-control" name="txtproname" placeholder="Enter The Product Name" required> </td>
+								</tr>
+
+								<tr>
+									<td>About</td>
+									<td><input type="text" class="form-control" name="txtabout" placeholder="Enter the Product About" required> </td>
+								</tr>
+
+								<tr>
+									<td>Product Category Name</td>
+									<td>
+										<select name="txtmsg" id="type" class="form-control">
+											<option>Done</option>
+											<option>No</option>
+										</select>
+									</td>
+								</tr>
+
+								<tr>
+									<td>Product Price</td>
+									<td><input type="number" class="form-control" name="txtprice" placeholder="Enter the Product Price" required> </td>
+								</tr>
+
+								<tr>
+									<td> Product Image </td>
+									<td><input type="file" class="form-control" name="file" accept="image/png, image/jpeg" required> </td>
+								</tr>
+
+								<tr>
+									<td>Product Use Month</td>
+									<td><input type="number" class="form-control" name="txtusemonth" placeholder="Enter the Month" required> </td>
+								</tr>
+
+								<tr>
+									<td> </td>
+									<td><input type="Submit" class="btn btn-success" name="btnsubmit" value="Submit">
+									<a href="/user-prolist" class="btn btn-primary">Back</a></td>
+								</tr>
+
+							</table>
+						</form>
+
+			</div>
+
+
+
+
+
+
+</html>

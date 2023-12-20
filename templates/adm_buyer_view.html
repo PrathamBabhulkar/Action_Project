@@ -1,0 +1,39 @@
+ {% include 'admin_headerfile.html' %}
+
+ {% include 'adm_navbar.html' %}
+
+
+  <div class="container">
+      <center><h1 class="h3 mb-0 text-gray-800"> BUY PRODUCT LIST </h1></center>
+        <br>
+
+      <div class="container btn btn-warning btn-block"><h3 style="color:black;">Total Price : {{ total_value.total_value }}</h3>  </div>
+        <br><br>
+            <div style="overflow-x:auto;">
+                <table class="table table-hover" >
+              <tr>
+                  <th>Product Number</th>
+                  <th>Product Name</th>
+                  <th>Product Price</th>
+                  <th style="color:blue">Buyer Name</th>
+                  <th style="color:green">Seller Name</th>
+                  <th>Payment Method</th>
+              </tr>
+
+                {% for n in buyer_list %}
+
+              <tr>
+                <td>{{n.bid}}</td>
+                <td>{{n.bname}}</td>
+                <td>{{n.bprice}}</td>
+                <td style="color:blue">{{n.buname}}</td>
+                <td style="color:green">{{n.owner}}</td>
+                  <td>{{n.bmethod}}</td>
+              </tr>
+
+                {% endfor %}
+
+
+            </table>
+            </div>
+      </div>

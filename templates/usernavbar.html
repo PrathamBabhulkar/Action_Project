@@ -1,0 +1,207 @@
+
+
+ <style>
+   .avatar {
+ vertical-align: middle;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  padding-top: 10px;
+}
+</style>
+
+<style>
+
+    /* Dropdown Button */
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+</style>
+
+
+<body>
+      <!-- banner bg main start -->
+      <div class="banner_bg_main">
+
+
+         <!-- header top section start -->
+
+         <div class="container" style="display:flex;">
+            <div>
+                {% for n in ulist %}
+                  <img src="{{ url_for('static', filename='upload_img/' + n.uimg.decode('utf-8')) }}" height="80px" width="80px" style="  border-radius: 50%;">
+                {% endfor %}
+            </div>
+
+            <div class="header_section_top">
+               <div class="row">
+                  <div class="col-sm-12">
+
+                     <div class="custom_menu">
+
+                        <ul>
+                            <li><b><h4 style="color:orange;">Welcome {{ uname }}</h4></b>
+                           <li><a href="#">Best Sellers</a></li>
+                           <li><a href="#">Best Deals</a></li>
+                           <li><a href="#">Customer Service</a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- header top section start -->
+         <!-- logo section start -->
+         <div class="logo_section">
+            <div class="container">
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="logo"><h1 class="banner_taital">EBid</h1></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- logo section end -->
+         <!-- header section start -->
+         <div class="header_section">
+            <div class="container">
+               <div class="containt_main">
+                  <div id="mySidenav" class="sidenav">
+                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                     <a href="/user-index">Home</a>
+<!--                     <a href="fashion.html">Fashion</a>-->
+<!--                     <a href="/electronic">Electronic</a>-->
+<!--                     <a href="jewellery.html">Jewellery</a>-->
+
+
+                     <div class="dropdown">
+                         <a class="">Buyer Action</a>
+<!--                         Ongoing Action-->
+                         <div class="dropdown-content">
+<!--                           <a href="/report">Product Report</a>-->
+                           <a href="/buyview">Direct Buy </a>
+                           <a href="/user-mybid ">Auction Buy</a>
+                           <a href="/user_buy_product_list">Buy Product</a>
+                         </div>
+                     </div>
+
+                      <div class="dropdown">
+                          <a class="">Seller Action</a>
+                          <div class="dropdown-content">
+                            <a href="/admin-addpro">Add Product</a>
+                            <a href="/admin-prolist"> Product List</a>
+                            <a href="/admin-prolist">Edit Product</a>
+                          </div>
+                      </div>
+
+                      <div class="dropdown">
+                          <a class="">Latest Action</a>
+                          <div class="dropdown-content">
+<!--                            <a href="/admin-addpro">Add Product</a>-->
+                            <a href="/user-prolist">Search Product</a>
+<!--                            <a href="#">Edit Product</a>-->
+                          </div>
+                      </div>
+
+                  </div>
+                  <span class="toggle_icon" onclick="openNav()"><img src="/static/images/toggle-icon.png"></span>
+                  <div class="dropdown">
+                     <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Your Profile
+                     </a>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/user-profile">View Profile</a>
+                        <a class="dropdown-item" href="/user-profileupdate">Edit Profile</a>
+<!--                        <a class="dropdown-item" href="#">Something else here</a>-->
+                     </div>
+                  </div>
+                  <div class="main">
+                     <!-- Another variation with a button -->
+
+                      <form method="post" action="{{ url_for('userprolist') }}" class="form-inline">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for a product" name="search_term">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" type="submit" style="background-color: #f26522; border-color: #f26522">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                      </form>
+
+
+<!--                     <div class="input-group">-->
+<!--                         <input type="text" class="form-control" placeholder="Search this blog" name="search">-->
+<!--                        <div class="input-group-append">-->
+<!--                           <button class="btn btn-secondary" type="submit" style="background-color: #f26522; border-color:#f26522 ">-->
+<!--                           <i class="fa fa-search"></i>-->
+<!--                           </button>-->
+<!--                        </div>-->
+<!--                     </div>-->
+                  </div>
+                  <div class="header_box">
+<!--                      <div class="dropdown">-->
+<!--                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login-->
+<!--                             </button>-->
+<!--                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+<!--                                <a class="dropdown-item" href="/admin-login">Admin Login</a>-->
+<!--                                <a class="dropdown-item" href="/user-singup">Customer Login</a>-->
+<!--                             </div>-->
+<!--                      </div>-->
+
+                     <div class="login_menu">
+                        <ul>
+                           <li><a href="#">
+                              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                              <span class="padding_10">Cart</span></a>
+                           </li>
+                           <li><a href="/user-login">
+                              <i class="fa fa-user" aria-hidden="true"></i>
+                              <span class="padding_10"> Logout
+                              </span></a>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- header section end -->

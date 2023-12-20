@@ -1,0 +1,68 @@
+
+{% include 'head.html' %}
+
+{% include 'usernavbar.html' %}
+
+
+<style>
+ .box-1
+  {
+       height:400px;
+       width:520px;
+       margin-center:100px;
+        padding-left:30px;
+        padding-right:30px;
+         justify-content:center;
+         background-color:white;
+   }
+
+</style>
+
+   <!-- Contact Start -->
+    <br><br><br><br>
+    <center>
+<!--    <div id="con_main_box" style="background-color:whitesmoke">-->
+                    <center>
+
+              <div class="box-1">
+                  <div><h2>Payment</h2></div>
+                  <div><h6 >All transaction are secure and encrypted.</h6></div>
+                     <br>
+                 <table class="table table-bordered table-hover">
+                      <tr>
+                         <td><input  type="radio" href="#" name="cradit">&nbsp;&nbsp;Cradit card&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         <img src="/static/images/payment1.png" height="12px" width="25px">
+                          <img src="/static/images/payment3.jpg" height="12px" width="25px">
+                          <img src="/static/images/payment2.png" height="12px" width="25px">
+<!--                          <img src="img/amex-card1.jpg" height="12px" width="25px">-->
+                          and more....</td>
+                      </tr>
+                           <tr>
+                               <td><input type="radio" href="/user-payment" name="cradit">&nbsp;&nbsp;QR Code</td>
+                           </tr>
+                               <tr>
+                                   <td><input  type="radio" href="#" name="cradit">&nbsp;&nbsp;Bank Transfer</td>
+                               </tr>
+                 </table>
+
+                  <center><div><button type="button" class="btn btn-primary" ><a href="/user-payment"  style="color:white; text-decoration:none">Submit</a></button></div></center>
+
+
+
+
+              </div>
+           </center>
+
+
+
+
+
+
+
+<!--    </div>-->
+    </center>
+
+
+    <!-- Contact End -->
+
+{% include "footer.html" %}
