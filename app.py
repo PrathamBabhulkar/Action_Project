@@ -40,7 +40,7 @@ def mainlogin():
 
 import os
 # Assuming 'img_avatar.png' is available in the 'static/upload_img' directory
-DEFAULT_IMAGE_PATH = 'static/upload_img/img_avatar.png'
+DEFAULT_IMAGE_PATH = 'img_avatar.png'
 
 @app.route('/user-singup', methods=['GET', 'POST'])
 def usersingup():
