@@ -38,7 +38,11 @@ def mainlogin():
     return render_template('main_login.html')
 
 
-@app.route('/user-singup',methods=['GET', 'POST'])
+import os
+# Assuming 'img_avatar.png' is available in the 'static/upload_img' directory
+DEFAULT_IMAGE_PATH = 'static/upload_img/img_avatar.png'
+
+@app.route('/user-singup', methods=['GET', 'POST'])
 def usersingup():
     error = None
     if request.method == "POST":
@@ -48,7 +52,14 @@ def usersingup():
         mobile = request.form['txtmobile']
         password1 = request.form['txtpassword1']
         password2 = request.form['txtpassword2']
-        userimage = request.files['file']
+        
+        # Check if user uploaded an image
+        if 'file' in request.files:
+            userimage = request.files['file']
+            if userimage.filename == '':
+                userimage = None
+        else:
+            userimage = None
 
         if not username or not email or not password1 or not password2:
             flash("Please fill in all required fields.")
@@ -66,16 +77,21 @@ def usersingup():
                     flash("Your Password and Confirm Password are not the same!!")
                 else:
                     cur = mysql.connection.cursor()
-                    cur.execute("INSERT INTO signup (fname,uname, email,mb, pass,uimg) VALUES (%s, %s, %s,%s, %s, %s)",
-                                (fullname,username, email, mobile, password1,userimage.filename, ))
+                    if userimage:
+                        cur.execute("INSERT INTO signup (fname, uname, email, mb, pass, uimg) VALUES (%s, %s, %s, %s, %s, %s)",
+                                    (fullname, username, email, mobile, password1, userimage.filename))
+                        userimage.save('static/upload_img/' + userimage.filename)
+                    else:
+                        cur.execute("INSERT INTO signup (fname, uname, email, mb, pass, uimg) VALUES (%s, %s, %s, %s, %s, %s)",
+                                    (fullname, username, email, mobile, password1, DEFAULT_IMAGE_PATH))
+
                     mysql.connection.commit()
                     cur.close()
-
-                    userimage.save('static/upload_img/' + userimage.filename)
 
                     flash("Signup successful!!")  # You can redirect to another page or show a success message.
 
     return render_template('user_singup.html', error=error)
+
 
 
 @app.route('/user-login',methods=['GET','POST'])
